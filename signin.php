@@ -2,7 +2,7 @@
 require_once 'db.config.php';
 session_start();
 $uuid = rand();
-$_SESSION['uuid'] = $$uuid;
+$_SESSION['uuid'] = $uuid;
 
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";

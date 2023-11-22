@@ -10,14 +10,14 @@ function onSubmit(e) {
     let usernameValue = usernameInput.value;
     let passwordValue = passwordInput.value;
 
-    // if(!validator.isAlpha(usernameValue)) {
-    //     return;
-    // } 
+    if (!validator.isAlpha(usernameValue, 'en-US', { ignore: new RegExp("[0-9]", "g") })) {
+        return;
+    }
 
 
-    // if(!validator.isLength(passwordValue , {min: 8})) {
-    //     return;
-    // }
+    if (!validator.isLength(passwordValue, { min: 8 })) {
+        return;
+    }
 
     form.submit();
 }
