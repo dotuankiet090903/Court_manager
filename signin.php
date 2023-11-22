@@ -10,13 +10,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['uuid'] == $_SESSION['uuid'])
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $stmt = "SELECT name,password,cid from cmanage.user WHERE name = '" . $username . "'";
+    $stmt = "SELECT name,password from cmanage.user WHERE name = '" . $username . "'";
     $result = $conn->query($stmt);
     $row = $result->fetch_assoc();
-
-    if($row['username'] == $username && $password == $row['password']) {
+    if($row['name'] == $username && $password == $row['password']) {
       //assume username is unique
       $_SESSION['username'] = $username;
+      header("Location: index.php");
+
     }
 
 }
@@ -37,11 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['uuid'] == $_SESSION['uuid'])
   <form novalidate  id='form' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="group bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 " method="post" onsubmit="onSubmit(event)">
   <?php $uuid = rand(); $_SESSION['uuid'] = $uuid?>
   <input type="hidden" value="<?php echo $uuid; ?>" id="uuid" name="uuid" />
-  <div class="mb-1">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        Logo here
-      </label>
-    </div>
     <div class="mb-1">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
         Username
@@ -53,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['uuid'] == $_SESSION['uuid'])
       <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
         Password
       </label>
-      <input class="peer shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500" id="password" type="password" placeholder="******************"  pattern=".{7,}" required>
+      <input class="peer shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500" id="password" name="password" type="password" placeholder="******************"  pattern=".{7,}" required>
       <p class="invisible peer-placeholder-shown:!invisible peer-invalid:visible text-red-500 text-xs italic"> Password not valid.</p>
     </div>
     <div class="mb-4 flex items-center justify-between">
@@ -67,10 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['uuid'] == $_SESSION['uuid'])
     </div>
   </form>
   <p class="text-center text-gray-500 text-xs">
-    &copy;2020 Acme Corp. All rights reserved.
+    &copy;2023 Bill Corp. All rights reserved.
   </p>
 </div>
     </div>
 </body>
-<script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 </html>
