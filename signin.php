@@ -1,11 +1,11 @@
 <?php
 require_once 'db.config.php';
 session_start();
-$uuid = rand();
-$_SESSION['uuid'] = $uuid;
 
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
+echo $_SESSION['uuid'];
+echo $_POST['uuid'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['uuid'] == $_SESSION['uuid']) {
     $username = $_POST['username'];
@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['uuid'] == $_SESSION['uuid'])
     <div class="flex flex-col items-center justify-center h-screen">
     <div class="w-full max-w-xs">
   <form id='form' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" onsubmit="onSubmit(event)">
+  <?php $uuid = rand(); $_SESSION['uuid'] = $uuid;?>
   <input type="hidden" value="<?php echo $uuid; ?>" id="uuid" name="uuid" />
   <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
