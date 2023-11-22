@@ -7,7 +7,7 @@ $_SESSION['uuid'] = $uuid;
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['randcheck'] == $_SESSION['rand']) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['uuid'] == $_SESSION['uuid']) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
